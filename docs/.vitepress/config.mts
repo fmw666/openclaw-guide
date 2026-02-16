@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "OpenClaw 指南",
   description: "解决你的一切问题",
+  base: "/openclaw-guide/",
   themeConfig: {
     nav: [
       { text: '指南', link: '/' },
