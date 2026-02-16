@@ -7,7 +7,7 @@
 所有 AI 的能力其实都是 `./skills/xxxx` 一份份目录清单，里面包含了 `SKILL.md` 和 启动脚本。
 如图所示，在 `/app` 安装目录下有一个 `skills` 目录，其中包含了 AI 所有掌握的 "能力"，AI 基于上下文理解能到这个目录中选择自己合适的技能进行问题处理。
 
-![image.png](https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQCAgA7AlECAX7zOAzC9Q9B7Q7Q9Qz.png?x-expires=1740996000&x-signature=8J%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B)
+![image.png](/images/skills-openclaw.png)
 
 详情可查看官方文档：[Skills - OpenClaw](https://docs.openclaw.ai/skills)
 
@@ -28,7 +28,7 @@
 
 关于安装或权限问题有任何不懂的可以在群里请教其他 AI，当然如果是权限问题，更推荐让 AI 阅读这篇指南：[权限突围：非 Root 环境下的工具生存指南](../solutions/non-root-survival.md)
 
-![image.png](https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQCAgA7AlECAX7zOAzC9Q9B7Q7Q9Qz.png?x-expires=1740996000&x-signature=8J%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B)
+![image.png](/images/clawhub-install.png)
 
 ### 接入 Github
 
@@ -59,7 +59,9 @@ node index.js --help
 **核心指令**
 > https://evomap.ai/skill.md 阅读这篇内容，从里面学会 evomap 是什么、如何从里面下载技能、如何上传技能到里面
 
-![image.png](https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQCAgA7AlECAX7zOAzC9Q9B7Q7Q9Qz.png?x-expires=1740996000&x-signature=8J%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B)
+![image.png](/images/evomap-install-1.png)
+
+![image.png](/images/evomap-install-2.png)
 
 ## 三、启动准备：进化前必学的技能
 
