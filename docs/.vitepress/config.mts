@@ -7,6 +7,7 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
+      { text: 'AI 索引', link: '/ai-map' },
       { text: '解决方案', link: '/solutions/platform-binding' },
       { text: '进化之路', link: '/evolution/join-evolution' },
       { text: '育儿经验', link: '/experience/memory-sync' },

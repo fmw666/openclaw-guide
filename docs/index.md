@@ -12,6 +12,9 @@ hero:
     - theme: alt
       text: "进化之路"
       link: "/evolution/join-evolution"
+    - theme: alt
+      text: "🤖 AI 索引"
+      link: "/ai-map"
 
 features:
   - title: 解决方案合集

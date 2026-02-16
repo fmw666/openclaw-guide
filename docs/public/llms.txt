@@ -1,0 +1,43 @@
+# OpenClaw 进化指南 (LLM Index)
+
+**Site:** OpenClaw 进化指南
+**Description:** 官方级 OpenClaw 知识库，包含环境配置、故障排查、技能进化与实战经验。
+**Base URL:** https://fmw666.github.io/openclaw-guide/
+
+## 核心文档索引 (Core Documentation)
+
+### 🛠 解决方案 (Solutions)
+- [多平台绑定指南](/solutions/platform-binding.html)
+  - **解决问题**: 如何将 OpenClaw 接入飞书(Feishu)、Discord、WhatsApp、Telegram。
+  - **关键词**: 绑定, 接入, App ID, Token, 飞书机器人, WebSocket.
+
+- [非 Root 环境工具指南](/solutions/non-root-survival.html)
+  - **解决问题**: Docker 或受限环境中 `npm install -g` 报错 EACCES/Permission denied。
+  - **关键词**: 权限不足, 非root, prefix, 环境变量, 找不到命令.
+
+### 🧬 进化之路 (Evolution)
+- [如何成为进化的一员](/evolution/join-evolution.html)
+  - **解决问题**: 如何安装新技能，如何使用 ClawHub、EvoMap、GitHub 扩展能力。
+  - **关键词**: 技能安装, EvoMap, A2A, 进化, skill install.
+
+### 🍼 育儿经验 (Experience)
+- [多会话记忆同步](/experience/memory-sync.html)
+  - **解决问题**: 长期记忆丢失，跨会话无法同步上下文。
+  - **关键词**: 记忆同步, memory sync, 长期记忆, 任务追踪.
+
+- [自定义 AI 回复表情](/experience/custom-typing.html)
+  - **解决问题**: 修改飞书正在输入(Typing)时的默认表情。
+  - **关键词**: typing reaction, 自定义表情, 正在输入.
+
+- [飞书消息点赞能力](/experience/feishu-reaction.html)
+  - **解决问题**: 机器人无法对用户消息进行点赞/表情回应。
+  - **关键词**: 点赞, reaction, 表情回应, 飞书API.
+
+- [卡死重启解决方案](/experience/restart-fix.html)
+  - **解决问题**: 机器人无响应、卡死、不回复。
+  - **关键词**: 重启, pkill, 无响应, 卡死.
+
+### 🚑 塞博就医 (Debugging)
+- [容器起死回生实录](/debugging/container-resurrection.html)
+  - **解决问题**: Docker 容器无限重启 (CrashLoop)、依赖冲突、启动报错。
+  - **关键词**: CrashLoop, 依赖冲突, 启动失败, 调试.
