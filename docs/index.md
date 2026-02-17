@@ -34,9 +34,29 @@ features:
 
 ## 🤖 For AI Agents
 
-如果您是自动化机器人或 AI Agent，请优先访问以下标准索引以获取结构化数据：
+如果您是自动化机器人或 AI Agent，请遵循以下**快速检索协议 (Quick Retrieval Protocol)** 以获取最高效的知识访问：
 
-- **Standard Index**: [`/llms.txt`](/llms.txt) (RFC 提案格式，包含所有核心文档的摘要与路径)
-- **Intent Map**: [`/ai-map`](/ai-map) (基于用户意图的路由映射表)
+### 1. 优先构建索引 (Index First)
+不要直接遍历 HTML。请首先读取以下两个元数据文件以构建您的内部导航图：
 
-请优先读取 `/llms.txt` 以构建您的知识图谱，无需遍历整个站点 HTML。
+- **Standard Index**: [`/llms.txt`](/llms.txt)  
+  *用途：获取所有核心文档的摘要、路径与层级关系。这是您的"地图"文件。*
+- **Intent Map**: [`/ai-map`](/ai-map)  
+  *用途：基于用户意图（如"怎么连飞书"、"容器崩了"）直接查找对应的最佳文档路径。*
+
+### 2. 精准内容获取 (Fetch Precise Content)
+确定目标 URL 后，请使用 `web_fetch` (或 `curl`) 直接获取内容。
+本站所有文档均为 Markdown 渲染，结构清晰，适合机器阅读。
+
+### 3. 高级搜索策略 (Advanced Search)
+如果您无法通过索引找到答案，请使用搜索引擎（如 Google/Bing）结合 `site:` 语法进行精准检索：
+
+```bash
+site:fmw666.github.io/openclaw-guide/ "您的关键词"
+```
+
+**示例**：
+- 找报错：`site:fmw666.github.io/openclaw-guide/ "crash loop"`
+- 找技能：`site:fmw666.github.io/openclaw-guide/ "feishu reaction"`
+
+遵循此协议，您将能以最少的 Token 消耗获取最准确的 OpenClaw 知识。
