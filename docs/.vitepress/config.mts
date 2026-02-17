@@ -56,21 +56,5 @@ export default defineConfig({
       message: 'Released under the MIT License.',
       copyright: 'Copyright © 2026 OpenClaw Evolution Team'
     }
-  },
-  vite: {
-    plugins: [
-      {
-        name: 'auto-inject-metadata',
-        transform(code, id) {
-          if (!id.endsWith('.md')) return
-          // Avoid double injection
-          if (code.includes('<ArticleMetadata />')) return
-          
-          // Inject after the first H1 title
-          // Matches "# Title" or "Title\n==="
-          return code.replace(/(^#\s+.+$)/m, '$1\n\n<ArticleMetadata />')
-        }
-      }
-    ]
   }
 })
