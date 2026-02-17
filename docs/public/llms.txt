@@ -15,6 +15,10 @@
   - **解决问题**: Docker 或受限环境中 `npm install -g` 报错 EACCES/Permission denied。
   - **关键词**: 权限不足, 非root, prefix, 环境变量, 找不到命令.
 
+- [Telegram Bot 进化引擎配置指南](/solutions/telegram-evolution-setup.html)
+  - **解决问题**: 如何配置 Telegram Bot 接收进化报告，解决群组消息读取失败 (Group Privacy) 问题。
+  - **关键词**: telegram, bot father, group privacy, 进化引擎, 消息权限.
+
 ### 🧬 进化之路 (Evolution)
 - [如何成为进化的一员](/evolution/join-evolution.html)
   - **解决问题**: 如何安装新技能，如何使用 ClawHub、EvoMap、GitHub 扩展能力。

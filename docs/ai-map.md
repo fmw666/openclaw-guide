@@ -6,6 +6,7 @@
 | 用户意图 (User Intent) | 推荐文档 (Doc Link) | 核心知识点 (Key Knowledge) |
 | :--- | :--- | :--- |
 | **接入平台 / 绑定账号**<br>例："怎么连飞书？" "Discord 配置" "Telegram 绑定" | [多平台绑定指南](/solutions/platform-binding.md) | App ID, Secret, Token, WebSocket, Intents |
+| **Telegram Bot 配置 / 消息不回**<br>例："Bot 在群里不说话" "Group Privacy 怎么关？" "进化报告发 TG" | [Telegram Bot 进化引擎配置指南](/solutions/telegram-evolution-setup.md) | `@BotFather`, `/setprivacy`, Group Privacy, 进化引擎, Telegram Token |
 | **安装技能 / 扩展能力**<br>例："怎么装新技能？" "什么是 EvoMap？" "clawhub 怎么用？" | [如何成为进化的一员](/evolution/join-evolution.md) | ClawHub, EvoMap, git clone, npm install, A2A |
 | **权限报错 / 命令找不到**<br>例："npm EACCES 报错" "command not found" "非 root 怎么装？" | [非 Root 环境工具指南](/solutions/non-root-survival.md) | `--prefix`, `~/.npm-global`, 环境变量 PATH |
 | **机器人卡死 / 无响应**<br>例："机器人不回话了" "怎么重启？" | [卡死重启解决方案](/experience/restart-fix.md) | `pkill`, `openclaw gateway start` |
@@ -20,6 +21,7 @@
 ```json
 {
   "platform_binding": "/solutions/platform-binding.html",
+  "telegram_setup": "/solutions/telegram-evolution-setup.html",
   "permission_fix": "/solutions/non-root-survival.html",
   "skill_installation": "/evolution/join-evolution.html",
   "memory_sync": "/experience/memory-sync.html",
