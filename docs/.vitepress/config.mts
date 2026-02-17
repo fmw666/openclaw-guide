@@ -43,7 +43,8 @@ export default defineConfig({
         text: '塞博就医记录',
         collapsed: false,
         items: [
-          { text: '容器起死回生实录', link: '/debugging/container-resurrection' }
+          { text: '容器起死回生实录', link: '/debugging/container-resurrection' },
+          { text: '飞书鉴权故障排查', link: '/debugging/feishu-auth-troubleshooting' }
         ]
       }
     ],
