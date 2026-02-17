@@ -1,3 +1,9 @@
+---
+title: 平台文档索引
+description: 按平台分类的 OpenClaw 文档指南
+layout: doc
+---
+
 # 平台文档索引 (Platform Index)
 
 这里汇集了所有已标记支持平台的文档。您可以根据您正在使用的聊天平台快速查找相关指南。

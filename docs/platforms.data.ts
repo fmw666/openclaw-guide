@@ -49,8 +49,11 @@ export default createContentLoader('**/*.md', {
   }
 })
 
-function formatDate(raw: string | number | Date): { time: number; string: string } {
-  const date = new Date(raw || new Date())
+function formatDate(raw: string | number | Date | undefined): { time: number; string: string } {
+  const date = raw ? new Date(raw) : new Date()
+  if (isNaN(date.getTime())) {
+    return { time: 0, string: 'Unknown Date' }
+  }
   return {
     time: +date,
     string: date.toLocaleDateString('en-US', {
