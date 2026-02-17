@@ -1,3 +1,14 @@
+---
+title: Telegram 机器人与表情包 (Reactions)
+description: 如何在 OpenClaw 中为 Telegram 机器人实现多表情动画效果。
+platforms: ['Telegram']
+author: '范茂伟'
+head:
+  - - meta
+    - name: keywords
+      content: telegram, bot, reaction, animation, openclaw
+---
+
 # Telegram 机器人与表情包 (Reactions)
 
 ::: tip 场景

@@ -37,6 +37,10 @@
   - **解决问题**: 机器人无法对用户消息进行点赞/表情回应。
   - **关键词**: 点赞, reaction, 表情回应, 飞书API.
 
+- [Telegram 机器人与表情包 (Reactions)](/experience/telegram-reactions.html)
+  - **解决问题**: 机器人无法在 Telegram 消息上添加多个表情，或需要使用动画表情。
+  - **关键词**: telegram, bot, reaction, animation, 多表情.
+
 - [卡死重启解决方案](/experience/restart-fix.html)
   - **解决问题**: 机器人无响应、卡死、不回复。
   - **关键词**: 重启, pkill, 无响应, 卡死.

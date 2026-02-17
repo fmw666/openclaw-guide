@@ -13,6 +13,7 @@
 | **容器崩溃 / 启动失败**<br>例："Docker 一直重启" "CrashLoop" "依赖冲突" | [容器起死回生实录](/debugging/container-resurrection.md) | `gateway.mode`, 插件冲突, 依赖修复 |
 | **记忆同步 / 长期记忆**<br>例："它记不住上文" "怎么同步记忆？" | [多会话记忆同步](/experience/memory-sync.md) | 记忆治理, Memory Sync, 跨会话 |
 | **飞书个性化 / 表情**<br>例："改正在输入表情" "能不能点赞消息？" | [自定义 AI 回复表情](/experience/custom-typing.md)<br>[飞书消息点赞能力](/experience/feishu-reaction.md) | `typingReaction`, `im:message.reactions` |
+| **Telegram 表情动画**<br>例："Bot 怎么发多个表情？" "做个动画效果" | [Telegram 机器人与表情包](/experience/telegram-reactions.md) | `setMessageReaction`, 单一限制, 动画实现 |
 
 ---
 
@@ -26,6 +27,7 @@
   "skill_installation": "/evolution/join-evolution.html",
   "memory_sync": "/experience/memory-sync.html",
   "crash_debug": "/debugging/container-resurrection.html",
-  "restart_bot": "/experience/restart-fix.html"
+  "restart_bot": "/experience/restart-fix.html",
+  "telegram_reactions": "/experience/telegram-reactions.html"
 }
 ```
