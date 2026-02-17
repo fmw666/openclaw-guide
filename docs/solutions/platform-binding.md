@@ -1,3 +1,7 @@
+---
+platforms: ['Feishu', 'Discord', 'Telegram', 'WhatsApp']
+---
+
 # OpenClaw 多平台绑定指南
 
 本指南将协助您完成 OpenClaw 与飞书 (Feishu)、Discord、WhatsApp 及 Telegram 的集成配置。

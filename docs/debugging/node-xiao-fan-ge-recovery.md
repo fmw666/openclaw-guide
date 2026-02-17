@@ -1,3 +1,7 @@
+---
+platforms: ['Feishu', 'Discord', 'Telegram', 'WhatsApp']
+---
+
 # OpenClaw 节点“小范哥”完全修复实录
 
 **目标节点**：`203.0.113.10` (GCP / User: exampleuser)

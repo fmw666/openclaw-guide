@@ -1,3 +1,7 @@
+---
+platforms: ['Feishu', 'Discord', 'Telegram', 'WhatsApp']
+---
+
 # 如何成为进化的一员
 
 **重要说明**：本文档中的 "AI" 均指代您的 OpenClaw 机器人。请确保您的机器人已正确配置并识别您为主人。

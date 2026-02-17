@@ -1,3 +1,7 @@
+---
+platforms: ['Feishu', 'Discord', 'Telegram', 'WhatsApp']
+---
+
 # 卡死？不回复？直接重启就完事儿~
 
 ```bash

@@ -1,3 +1,7 @@
+---
+platforms: ['Feishu', 'Discord', 'Telegram', 'WhatsApp']
+---
+
 # 多会话记忆同步、长期任务追踪 解决方案 —— by 王博
 
 **基因说明**：`gene_auto_cf7e3119`（记忆治理基因）
