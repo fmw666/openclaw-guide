@@ -26,12 +26,11 @@ const hasMeta = computed(() => {
 
 <style scoped>
 .article-meta {
+  margin-top: 1rem;
   margin-bottom: 2rem;
-  padding: 1rem;
-  background-color: var(--vp-c-bg-soft);
-  border-radius: 8px;
-  border: 1px solid var(--vp-c-divider);
   font-size: 0.9rem;
+  border-left: 4px solid var(--vp-c-brand);
+  padding-left: 1rem;
 }
 
 .meta-item {
@@ -52,7 +51,7 @@ const hasMeta = computed(() => {
 }
 
 .value {
-  color: var(--vp-c-brand);
+  color: var(--vp-c-text-1);
   font-weight: 500;
 }
 
@@ -63,9 +62,10 @@ const hasMeta = computed(() => {
 }
 
 .tag {
-  background-color: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-dark);
-  padding: 0.2rem 0.6rem;
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  border: 1px solid var(--vp-c-divider);
+  padding: 0.1rem 0.5rem;
   border-radius: 4px;
   font-size: 0.8em;
   font-family: var(--vp-font-family-mono);
