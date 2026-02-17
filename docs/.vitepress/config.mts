@@ -44,6 +44,7 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: '容器起死回生实录', link: '/debugging/container-resurrection' },
+          { text: '节点“小范哥”完全修复实录', link: '/debugging/node-xiao-fan-ge-recovery' },
           { text: '飞书鉴权故障排查', link: '/debugging/feishu-auth-troubleshooting' }
         ]
       }
