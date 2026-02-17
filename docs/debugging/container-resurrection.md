@@ -1,98 +1,184 @@
-# OpenClaw 容器“起死回生”实录：从无限重启到正常对话
+# OpenClaw 节点“小范哥”完全修复实录
 
-**Author:** Brendan Gregg
-**Date:** 2026/02/15 20:00
+**目标节点**：`203.0.113.10` (GCP / User: exampleuser)
+**故障现象**：群聊不回复，节点离线。
+**修复时间**：2026-02-17
 
-**摘要**：本文记录了一次 OpenClaw Docker 容器无法启动且无响应的排查过程。涉及配置模式缺失、本地插件依赖损坏冲突、以及飞书鉴权缺失三个连环坑。
-**关键词**：Docker CrashLoop, gateway.mode, Plugin Conflict, Feishu Auth
+---
 
-## 🚨 故障一：网关启动阻塞 (Start Blocked)
+## 第一阶段：诊断与启动修复 (Boot Loop)
 
-### 现象
-容器启动后立即退出，日志报错：
-```
-Gateway start blocked: set gateway.mode=local (current: unset) or pass --allow-unconfigured.
-```
+### 1. 现象确认
 
-### 原因分析
-**Visibility is Everything.** 错误日志非常直白。OpenClaw Gateway 在启动时需要明确其运行模式（local、container 等）。在旧版本或某些部署模板中可能默认未设置，导致安全锁被触发，阻止 Gateway 盲目启动。
-
-### 解决方案
-修改（或新建）配置文件 `openclaw.json`，显式声明运行模式：
-
-```json
-{
-  "gateway": {
-    "mode": "local"
-  } 
-} 
-```
-
-## 💥 故障二：插件依赖崩溃与冲突 (Dependency Crash)
-
-### 现象
-修复模式后，容器虽然尝试启动，但陷入 CrashLoop（反复重启）。日志显示：
-```
-[plugins] duplicate plugin id detected; later plugin may be overridden (/app/extensions/feishu/index.ts)
-...
-[plugins] feishu failed to load from /home/node/.openclaw/extensions/feishu/index.ts: Error: Cannot find module '@sinclair/typebox'
-```
-
-### 原因分析
-这里有两个问题叠加：
-1.  **冲突（Duplicate）**：用户挂载的 `~/.openclaw/extensions/feishu`（本地版）与容器内置的 `/app/extensions/feishu`（官方版）同时存在，OpenClaw 尝试加载本地版覆盖内置版。
-2.  **损坏（Corruption）**：本地版插件缺少 `node_modules` 依赖（如 `@sinclair/typebox`），导致加载时直接抛出异常，进程崩溃退出。
-
-### 解决方案
-**Methodology > Random Tweaking.** 不要试图在容器里修补损坏的依赖。直接移除干扰源，让系统回滚到稳定的内置版本。
-
-执行操作：将损坏的本地插件移走备份。
+通过 `nodes status` 发现节点列表为空。尝试 SSH 登录并检查 Docker 状态：
 
 ```bash
-mv ~/.openclaw/extensions/feishu ~/.openclaw/feishu_broken_backup 
+ssh -i /home/node/.openclaw/gcp_key exampleuser@203.0.113.10 "docker ps -a"
 ```
 
-重启后，系统自动加载 `/app/extensions` 下的完整插件，CrashLoop 解除。
+**结果**：容器 `openclaw-openclaw-gateway-1` 状态为 `Restarting`（无限重启）。
 
-## 😶 故障三：服务哑火 (No Reply)
+### 2. 查看崩溃日志
 
-### 现象
-容器状态 Up，日志显示 `listening on port 18789`，但在飞书群内 @机器人 毫无反应。
+```bash
+docker logs openclaw-openclaw-gateway-1 --tail 20
+```
 
-### 原因分析
-排查 `auth-profiles.json` 和环境变量，发现仅配置了 Google 模型凭证，完全缺失飞书（Feishu）的 App ID 和 App Secret。
-没有凭证，OpenClaw 既无法校验来自飞书 Webhook 的签名，也无法建立 WebSocket 长连接，处于“无权访问”状态。
+**报错**：`Gateway start blocked: set gateway.mode=local (current: unset)`
+**原因**：新版 OpenClaw 安全机制要求显式声明运行模式，旧容器缺少此配置。
 
-### 解决方案
-在 `openclaw.json` 中补全 channels 配置（注意：此处使用 WebSocket 模式推荐配置）：
+### 3. 修复方案 (环境变量法)
 
-```json
-{
- "channels": {
+直接修改启动命令，注入环境变量，这是最稳妥的方法。
+
+**修复命令**：
+
+```bash
+# 停止并删除旧容器
+docker rm -f openclaw-openclaw-gateway-1
+
+# 使用环境变量 OPENCLAW_GATEWAY_MODE=local 启动
+docker run -d \
+  --name openclaw-openclaw-gateway-1 \
+  --restart unless-stopped \
+  -e OPENCLAW_GATEWAY_MODE=local \
+  -v /home/exampleuser/.openclaw:/home/node/.openclaw \
+  -p 3000:3000 \
+  openclaw:local
+```
+
+---
+
+## 第二阶段：大脑移植 (模型与鉴权配置)
+
+### 1. 现象
+
+容器启动成功 (`Up`)，但日志显示模型加载为 `anthropic`，且报错 `No API key found`。
+**原因**：未配置默认模型，且 Anthropic Key 缺失。
+
+### 2. 资源搜索
+
+在宿主机搜索遗留的 API Key：
+
+```bash
+grep -r "AIza" /home/exampleuser/.openclaw 2>/dev/null
+```
+
+**结果**：找到 Google Gemini Key。
+
+### 3. 修复方案
+
+再次重建容器，强制指定模型环境变量，防止它回退到默认的 Anthropic。
+
+**修复命令**：
+
+```bash
+docker rm -f openclaw-openclaw-gateway-1
+
+docker run -d \
+  --name openclaw-openclaw-gateway-1 \
+  --restart unless-stopped \
+  -e OPENCLAW_GATEWAY_MODE=local \
+  -e OPENCLAW_AGENT_MODEL=google/gemini-3-pro-preview \
+  -v /home/exampleuser/.openclaw:/home/node/.openclaw \
+  -p 3000:3000 \
+  openclaw:local
+```
+
+---
+
+## 第三阶段：感官修复 (飞书插件与 JSON 语法)
+
+### 1. 现象
+
+日志显示 `feishu` 插件并未启动，或启动失败。检查配置文件 `openclaw.json` 发现：
+1.  `"enabled": false`（插件被禁用）。
+2.  缺少 `appId` 和 `appSecret`。
+
+### 2. 修复方案 (容器内 Node.js 写入)
+
+为了保证 JSON 格式绝对正确，**不使用 Shell 文本处理工具**（容易产生换行符错误），而是利用容器内的 Node.js 进行文件写入。
+
+**修复命令**：
+
+```bash
+docker exec openclaw-openclaw-gateway-1 node -e '
+const fs = require("fs");
+const config = {
+  "agents": {
+    "defaults": {
+      "model": { "primary": "google/gemini-3-pro-preview" },
+      "workspace": "/home/node/.openclaw/workspace",
+      "compaction": { "mode": "safeguard" },
+      "maxConcurrent": 4
+    }
+  },
+  "messages": { "ackReactionScope": "group-mentions" },
+  "channels": {
     "feishu": {
-      "enabled": true, 
-      "appId": "cli_xxxxxxxxxxxx",       // 填入你的 App ID 
-      "appSecret": "xxxxxxxxxxxxxxxxxxx", // 填入你的 App Secret 
+      "enabled": true,
+      "appId": "<FEISHU_APP_ID_REDACTED>",
+      "appSecret": "<FEISHU_APP_SECRET_REDACTED>",
       "requireMention": false
     }
   },
+  "gateway": { "mode": "local" },
   "plugins": {
-    "entries": { 
-      "feishu": { "enabled": true }      // 确保插件启用 
-    }
-  } 
-} 
+    "entries": { "feishu": { "enabled": true } }
+  }
+};
+fs.writeFileSync("/home/node/.openclaw/openclaw.json", JSON.stringify(config, null, 2));
+'
+docker restart openclaw-openclaw-gateway-1
 ```
 
-## ✅ 最终验证 (Success)
+---
 
-应用上述修复后，观察日志出现以下关键信号，代表彻底修复：
-1.  `feishu[default]: bot open_id resolved: ou_xxxx` -> 鉴权通过
-2.  `feishu[default]: WebSocket client started` -> 连接建立
-3.  `ws client ready` -> 通道就绪
+## 第四阶段：能量接通 (Auth Profile 结构修正)
 
-## 💡 经验总结 (Best Practices)
+### 1. 现象
 
-1.  **配置优先**：Docker 启动挂掉，90% 是配置文件路径不对或内容缺项。先检查 `openclaw.json`。
-2.  **避免手动覆盖插件**：除非你在开发调试插件，否则不要在 `~/.openclaw/extensions` 下放置与官方同名的插件文件夹，这会导致依赖地狱。
-3.  **看日志，看全日志**：不要只看最后一行。崩溃往往发生在前面的 `Error: Cannot find module`，而最后一行可能只是无关痛痒的 `Cleaning up`。
+飞书连接成功，但回复时报错：`Error: No API key found for provider "google"`。
+
+### 2. 问题排查
+
+检查 `auth-profiles.json`，发现 JSON 结构与当前版本不匹配（使用了旧版或简化版结构）。
+
+### 3. 最终修复
+
+参考标准环境的正确结构，重写 `auth-profiles.json`。
+
+**修复命令**：
+
+```bash
+docker exec openclaw-openclaw-gateway-1 node -e '
+const fs = require("fs");
+const path = "/home/node/.openclaw/agents/main/agent/auth-profiles.json";
+// 确保目录存在
+const dir = require("path").dirname(path);
+if (!fs.existsSync(dir)) { fs.mkdirSync(dir, { recursive: true }); }
+
+// 构造符合版本要求的配置对象
+const auth = {
+  "version": 1,
+  "profiles": {
+    "google:default": {
+      "type": "api_key",
+      "provider": "google",
+      "key": "<GOOGLE_API_KEY_REDACTED>"
+    }
+  }
+};
+fs.writeFileSync(path, JSON.stringify(auth, null, 2));
+'
+docker restart openclaw-openclaw-gateway-1
+```
+
+---
+
+## 经验总结 (Lessons Learned)
+
+1.  **启动模式**：OpenClaw 必须指定 `OPENCLAW_GATEWAY_MODE=local` 才能在无配置情况下启动。
+2.  **文件写入**：在远程 Shell 中修改 JSON 配置文件极其容易出错。**最佳实践是使用 `docker exec ... node -e ...`**，利用代码逻辑生成文件。
+3.  **配置层级**：`auth-profiles.json` 的结构随版本变化，必须严格对比当前运行版本的规范（`google:default` 扁平键名 vs 嵌套）。
+4.  **模型指定**：环境变量 `OPENCLAW_AGENT_MODEL` 优先级高于配置文件，是修复模型错乱的“强制手段”。
