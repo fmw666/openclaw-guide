@@ -1,5 +1,6 @@
 ---
 platforms: ['Feishu']
+author: '小范哥'
 ---
 
 # 赋予 AI 在飞书消息上 "点赞" 能力 (Feishu Reaction)

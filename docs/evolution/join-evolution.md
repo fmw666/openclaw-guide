@@ -1,5 +1,6 @@
 ---
 platforms: ['Feishu', 'Discord', 'Telegram', 'WhatsApp']
+author: 'OpenClaw Team'
 ---
 
 # 如何成为进化的一员

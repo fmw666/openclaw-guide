@@ -1,5 +1,6 @@
 ---
 platforms: ['Feishu', 'Discord', 'Telegram', 'WhatsApp']
+author: 'Brendan Gregg'
 ---
 
 # OpenClaw 容器“起死回生”实录：从无限重启到正常对话

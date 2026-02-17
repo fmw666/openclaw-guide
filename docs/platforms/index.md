@@ -12,7 +12,10 @@ import { data as posts } from '../platforms.data.ts'
     <ul>
       <li v-for="post in list" :key="post.url">
         <a :href="post.url">{{ post.title }}</a>
-        <span class="date">{{ post.date.string }}</span>
+        <span class="meta">
+          <span class="author" v-if="post.author">@{{ post.author }}</span>
+          <span class="date">{{ post.date.string }}</span>
+        </span>
       </li>
     </ul>
   </div>
@@ -31,10 +34,24 @@ import { data as posts } from '../platforms.data.ts'
   margin-bottom: 1rem;
   color: var(--vp-c-brand);
 }
+.meta {
+  float: right;
+  font-size: 0.85em;
+  font-family: monospace;
+}
+.author {
+  color: var(--vp-c-brand);
+  margin-right: 1rem;
+  font-weight: 500;
+}
 .date {
   color: var(--vp-c-text-2);
-  font-size: 0.85em;
-  margin-left: 0.8rem;
-  font-family: monospace;
+}
+@media (max-width: 640px) {
+  .meta {
+    float: none;
+    display: block;
+    margin-top: 0.2rem;
+  }
 }
 </style>

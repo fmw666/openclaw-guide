@@ -1,5 +1,6 @@
 ---
 platforms: ['Feishu', 'Discord', 'Telegram', 'WhatsApp']
+author: '小范哥'
 ---
 
 # OpenClaw 节点“小范哥”完全修复实录

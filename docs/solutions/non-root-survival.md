@@ -1,5 +1,6 @@
 ---
 platforms: ['Feishu', 'Discord', 'Telegram', 'WhatsApp']
+author: '小范哥'
 ---
 
 # 权限突围：非 Root 环境下的工具生存指南

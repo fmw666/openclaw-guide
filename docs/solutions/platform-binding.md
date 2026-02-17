@@ -1,5 +1,6 @@
 ---
 platforms: ['Feishu', 'Discord', 'Telegram', 'WhatsApp']
+author: 'OpenClaw Team'
 ---
 
 # OpenClaw 多平台绑定指南

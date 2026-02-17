@@ -7,6 +7,7 @@ interface Post {
     time: number
     string: string
   }
+  author?: string
 }
 
 declare const data: Record<string, Post[]>
@@ -25,7 +26,8 @@ export default createContentLoader('**/*.md', {
         const post: Post = {
           title: frontmatter.title,
           url,
-          date: formatDate(frontmatter.date)
+          date: formatDate(frontmatter.date),
+          author: frontmatter.author
         }
 
         // 3. Classify articles into corresponding platform arrays

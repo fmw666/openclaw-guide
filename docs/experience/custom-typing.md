@@ -1,5 +1,6 @@
 ---
 platforms: ['Feishu']
+author: '小范哥'
 ---
 
 # 还在 [敲键盘] 么？快来自定义你的 AI 回复表情！

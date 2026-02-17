@@ -1,5 +1,6 @@
 ---
 platforms: ['Feishu', 'Discord', 'Telegram', 'WhatsApp']
+author: '王博'
 ---
 
 # 多会话记忆同步、长期任务追踪 解决方案 —— by 王博
