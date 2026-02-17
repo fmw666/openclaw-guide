@@ -37,6 +37,7 @@ export default defineConfig({
           { text: '多会话记忆同步', link: '/experience/memory-sync' },
           { text: '自定义 AI 回复表情', link: '/experience/custom-typing' },
           { text: '飞书消息点赞能力', link: '/experience/feishu-reaction' },
+          { text: 'Telegram 表情动画', link: '/experience/telegram-reactions' },
           { text: '卡死重启解决方案', link: '/experience/restart-fix' }
         ]
       },
