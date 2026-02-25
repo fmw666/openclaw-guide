@@ -1,0 +1,95 @@
+# YOUR_PROJECT_NAME Docsite (LLM Index)
+
+**Site:** YOUR_PROJECT_NAME Documentation & Knowledge Base
+**Description:** 项目的统一知识中枢 — 架构设计、数据模型、API 文档、开发指南、技术方案。面向团队与 AI Agent。
+**Base URL:** https://YOUR_ORG.github.io/YOUR_REPO/
+**AI Intent Map:** /ai-map.html
+**Sitemap:** /sitemap.xml
+**Last Updated:** YYYY-MM-DD
+
+---
+
+## How to Use (For AI Agents)
+
+1. Read this file first to build your internal navigation map.
+2. Use the "AI Intent Map" (/ai-map.html) for intent-based document routing.
+3. Fetch specific documents via their URL path below.
+4. All pages are Markdown-rendered, structured with headings, tables, and code blocks — optimized for machine reading.
+
+---
+
+## 架构设计 (Architecture)
+
+- [系统架构总览](/architecture/overview.html)
+  - **内容**: 分层架构图、模块职责、服务拓扑
+  - **关键词**: 架构, 分层, 模块, 服务, 拓扑, system design
+
+- [技术栈说明](/architecture/tech-stack.html)
+  - **内容**: 框架选型、核心依赖、版本要求
+  - **关键词**: 技术栈, 框架, 依赖, 版本, Node.js, PostgreSQL, Redis
+
+- [部署架构](/architecture/deployment.html)
+  - **内容**: 环境列表、部署拓扑、CI/CD 流程、环境变量
+  - **关键词**: 部署, Docker, CI/CD, 环境变量, GitHub Actions
+
+## 数据模型 (Data Models)
+
+- [模型总览](/models/overview.html)
+  - **内容**: 核心实体定义、字段说明、索引策略、命名约定
+  - **关键词**: 数据模型, 表结构, 字段, 索引, PostgreSQL, schema
+
+- [实体关系](/models/entity-relationship.html)
+  - **内容**: ER 图、外键关系、级联策略
+  - **关键词**: ER 图, 外键, 关系, 级联, 一对多, 多对多
+
+## API 文档 (API Documentation)
+
+- [API 总览](/api/overview.html)
+  - **内容**: 端点列表、请求/响应格式、认证方式
+  - **关键词**: API, 端点, REST, 请求, 响应, Bearer Token
+
+- [API 设计规范](/api/conventions.html)
+  - **内容**: RESTful 规范、HTTP 方法、状态码、分页、版本策略
+  - **关键词**: RESTful, 规范, 状态码, 分页, 版本
+
+## 开发指南 (Guides)
+
+- [快速开始](/guides/getting-started.html)
+  - **内容**: 环境搭建、依赖安装、本地运行步骤
+  - **关键词**: 快速开始, 安装, 环境, 本地开发, Docker
+
+- [编码规范](/guides/coding-standards.html)
+  - **内容**: 命名约定、目录结构、代码风格、注释规范
+  - **关键词**: 编码规范, 命名, 代码风格, ESLint, Prettier
+
+- [Git 工作流](/guides/git-workflow.html)
+  - **内容**: 分支策略、Commit 规范、Code Review 流程
+  - **关键词**: Git, 分支, commit, PR, code review
+
+## 技术方案 (Solutions)
+
+- [缓存方案](/solutions/caching.html)
+  - **内容**: 缓存层级、Redis Key 规范、失效策略、常用模式
+  - **关键词**: 缓存, Redis, TTL, Cache-Aside, 缓存穿透, 缓存雪崩
+
+- [认证与授权](/solutions/authentication.html)
+  - **内容**: JWT 认证流程、Token 规范、RBAC 权限模型
+  - **关键词**: 认证, JWT, Token, RBAC, 权限, 登录
+
+- [错误处理规范](/solutions/error-handling.html)
+  - **内容**: 错误码体系、全局异常处理、日志规范
+  - **关键词**: 错误码, 异常处理, 日志, ERROR, 错误响应
+
+## 其他
+
+- [变更日志](/changelog/index.html)
+  - **内容**: 文档与项目变更记录
+  - **关键词**: changelog, 变更, 版本, 更新
+
+- [标签索引](/tags/index.html)
+  - **内容**: 按标签分类的文档索引
+  - **关键词**: 标签, 分类, 索引
+
+- [AI Skill 模板](/skill-template.md)
+  - **内容**: AI Agent 操作手册模板 — 检索协议、维护协议、文档格式规范、操作脚本
+  - **关键词**: skill, agent, 模板, 检索, 维护, 集成

@@ -1,0 +1,14 @@
+{
+  "name": "docsite-rag-template",
+  "version": "1.0.0",
+  "description": "AI-first documentation site template powered by VitePress — designed for humans to read and AI agents to consume via RAG.",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "dependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
