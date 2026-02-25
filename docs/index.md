@@ -2,61 +2,65 @@
 layout: home
 
 hero:
-  name: "OpenClaw 进化指南"
-  text: "解决你的一切问题"
-  tagline: "从基础绑定到高阶进化，打造你的终极 Agent"
+  name: "YOUR_PROJECT_NAME"
+  text: "Documentation & Knowledge Base"
+  tagline: "面向团队与 AI Agent 的统一知识中枢 — 架构、模型、API、方案一站查阅"
   actions:
     - theme: brand
       text: "快速开始"
-      link: "/solutions/platform-binding"
+      link: "/guides/getting-started"
     - theme: alt
-      text: "进化之路"
-      link: "/evolution/join-evolution"
+      text: "架构设计"
+      link: "/architecture/overview"
     - theme: alt
-      text: "🤖 AI 索引"
+      text: "AI 索引"
       link: "/ai-map"
 
 features:
-  - title: 解决方案合集
-    details: 包含平台绑定、权限配置等核心环境搭建指南。
-    link: "/solutions/platform-binding"
-  - title: 迈向进化之路
-    details: 探索 EvoMap、ClawHub，让你的 Agent 持续学习新技能。
-    link: "/evolution/join-evolution"
-  - title: 育儿经验分享
-    details: 记忆同步、表情包定制、卡死重启等实战调教技巧。
-    link: "/experience/memory-sync"
-  - title: 塞博就医记录
-    details: 真实故障排查案例，教你如何让宕机的容器起死回生。
-    link: "/debugging/container-resurrection"
-
+  - icon: 🏗️
+    title: 架构设计
+    details: 系统架构总览、技术栈说明、部署架构 — 理解系统全貌的入口。
+    link: "/architecture/overview"
+  - icon: 🗃️
+    title: 数据模型
+    details: 核心实体与关系、字段定义、ER 图 — 数据层的单一事实来源。
+    link: "/models/overview"
+  - icon: 🔌
+    title: API 文档
+    details: 接口总览、设计规范、版本策略 — 前后端协作的契约。
+    link: "/api/overview"
+  - icon: 📐
+    title: 技术方案
+    details: 缓存、认证、错误处理等关键决策的详细方案文档。
+    link: "/solutions/caching"
+  - icon: 📖
+    title: 开发指南
+    details: 从快速上手到编码规范、Git 工作流 — 新人入职的第一站。
+    link: "/guides/getting-started"
+  - icon: 🤖
+    title: AI-First 设计
+    details: 内置 sitemap、llms.txt、AI 索引 — 让 Agent 以最低 Token 消耗获取精准知识。
+    link: "/ai-map"
 ---
 
-## 🤖 For AI Agents
+## For AI Agents — Quick Retrieval Protocol
 
-如果您是自动化机器人或 AI Agent，请遵循以下**快速检索协议 (Quick Retrieval Protocol)** 以获取最高效的知识访问：
+如果你是 AI Agent 或自动化工具，请遵循以下协议以最高效率检索知识：
 
-### 1. 优先构建索引 (Index First)
-不要直接遍历 HTML。请首先读取以下两个元数据文件以构建您的内部导航图：
+### 1. 优先读取索引
 
-- **Standard Index**: [`/llms.txt`](/llms.txt)  
-  *用途：获取所有核心文档的摘要、路径与层级关系。这是您的"地图"文件。*
-- **Intent Map**: [`/ai-map`](/ai-map)  
-  *用途：基于用户意图（如"怎么连飞书"、"容器崩了"）直接查找对应的最佳文档路径。*
+| 文件 | 用途 |
+|:-----|:-----|
+| [`/llms.txt`](/llms.txt) | 结构化文档索引 — 获取所有文档的摘要、路径与关键词 |
+| [`/ai-map`](/ai-map) | 意图映射表 — 根据开发意图直接定位最佳文档 |
+| [`/sitemap.xml`](/sitemap.xml) | XML Sitemap — 所有页面的完整 URL 列表 |
 
-### 2. 精准内容获取 (Fetch Precise Content)
-确定目标 URL 后，请使用 `web_fetch` (或 `curl`) 直接获取内容。
-本站所有文档均为 Markdown 渲染，结构清晰，适合机器阅读。
+### 2. 精准获取内容
 
-### 3. 高级搜索策略 (Advanced Search)
-如果您无法通过索引找到答案，请使用搜索引擎（如 Google/Bing）结合 `site:` 语法进行精准检索：
+确定目标 URL 后，使用 `web_fetch` 或 `curl` 直接获取页面内容。所有文档均为 Markdown 渲染，结构清晰适合机器阅读。
 
-```bash
-site:fmw666.github.io/openclaw-guide/ "您的关键词"
+### 3. 站内搜索
+
 ```
-
-**示例**：
-- 找报错：`site:fmw666.github.io/openclaw-guide/ "crash loop"`
-- 找技能：`site:fmw666.github.io/openclaw-guide/ "feishu reaction"`
-
-遵循此协议，您将能以最少的 Token 消耗获取最准确的 OpenClaw 知识。
+site:YOUR_ORG.github.io/YOUR_REPO "关键词"
+```

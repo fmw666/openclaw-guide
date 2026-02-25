@@ -1,51 +1,91 @@
-# OpenClaw 进化指南 (LLM Index)
+# YOUR_PROJECT_NAME Docsite (LLM Index)
 
-**Site:** OpenClaw 进化指南
-**Description:** 官方级 OpenClaw 知识库，包含环境配置、故障排查、技能进化与实战经验。
-**Base URL:** https://fmw666.github.io/openclaw-guide/
+**Site:** YOUR_PROJECT_NAME Documentation & Knowledge Base
+**Description:** 项目的统一知识中枢 — 架构设计、数据模型、API 文档、开发指南、技术方案。面向团队与 AI Agent。
+**Base URL:** https://YOUR_ORG.github.io/YOUR_REPO/
+**AI Intent Map:** /ai-map.html
+**Sitemap:** /sitemap.xml
+**Last Updated:** YYYY-MM-DD
 
-## 核心文档索引 (Core Documentation)
+---
 
-### 🛠 解决方案 (Solutions)
-- [多平台绑定指南](/solutions/platform-binding.html)
-  - **解决问题**: 如何将 OpenClaw 接入飞书(Feishu)、Discord、WhatsApp、Telegram。
-  - **关键词**: 绑定, 接入, App ID, Token, 飞书机器人, WebSocket.
+## How to Use (For AI Agents)
 
-- [非 Root 环境工具指南](/solutions/non-root-survival.html)
-  - **解决问题**: Docker 或受限环境中 `npm install -g` 报错 EACCES/Permission denied。
-  - **关键词**: 权限不足, 非root, prefix, 环境变量, 找不到命令.
+1. Read this file first to build your internal navigation map.
+2. Use the "AI Intent Map" (/ai-map.html) for intent-based document routing.
+3. Fetch specific documents via their URL path below.
+4. All pages are Markdown-rendered, structured with headings, tables, and code blocks — optimized for machine reading.
 
-- [Telegram Bot 进化引擎配置指南](/solutions/telegram-evolution-setup.html)
-  - **解决问题**: 如何配置 Telegram Bot 接收进化报告，解决群组消息读取失败 (Group Privacy) 问题。
-  - **关键词**: telegram, bot father, group privacy, 进化引擎, 消息权限.
+---
 
-### 🧬 进化之路 (Evolution)
-- [如何成为进化的一员](/evolution/join-evolution.html)
-  - **解决问题**: 如何安装新技能，如何使用 ClawHub、EvoMap、GitHub 扩展能力。
-  - **关键词**: 技能安装, EvoMap, A2A, 进化, skill install.
+## 架构设计 (Architecture)
 
-### 🍼 育儿经验 (Experience)
-- [多会话记忆同步](/experience/memory-sync.html)
-  - **解决问题**: 长期记忆丢失，跨会话无法同步上下文。
-  - **关键词**: 记忆同步, memory sync, 长期记忆, 任务追踪.
+- [系统架构总览](/architecture/overview.html)
+  - **内容**: 分层架构图、模块职责、服务拓扑
+  - **关键词**: 架构, 分层, 模块, 服务, 拓扑, system design
 
-- [自定义 AI 回复表情](/experience/custom-typing.html)
-  - **解决问题**: 修改飞书正在输入(Typing)时的默认表情。
-  - **关键词**: typing reaction, 自定义表情, 正在输入.
+- [技术栈说明](/architecture/tech-stack.html)
+  - **内容**: 框架选型、核心依赖、版本要求
+  - **关键词**: 技术栈, 框架, 依赖, 版本, Node.js, PostgreSQL, Redis
 
-- [飞书消息点赞能力](/experience/feishu-reaction.html)
-  - **解决问题**: 机器人无法对用户消息进行点赞/表情回应。
-  - **关键词**: 点赞, reaction, 表情回应, 飞书API.
+- [部署架构](/architecture/deployment.html)
+  - **内容**: 环境列表、部署拓扑、CI/CD 流程、环境变量
+  - **关键词**: 部署, Docker, CI/CD, 环境变量, GitHub Actions
 
-- [Telegram 机器人与表情包 (Reactions)](/experience/telegram-reactions.html)
-  - **解决问题**: 机器人无法在 Telegram 消息上添加多个表情，或需要使用动画表情。
-  - **关键词**: telegram, bot, reaction, animation, 多表情.
+## 数据模型 (Data Models)
 
-- [卡死重启解决方案](/experience/restart-fix.html)
-  - **解决问题**: 机器人无响应、卡死、不回复。
-  - **关键词**: 重启, pkill, 无响应, 卡死.
+- [模型总览](/models/overview.html)
+  - **内容**: 核心实体定义、字段说明、索引策略、命名约定
+  - **关键词**: 数据模型, 表结构, 字段, 索引, PostgreSQL, schema
 
-### 🚑 塞博就医 (Debugging)
-- [容器起死回生实录](/debugging/container-resurrection.html)
-  - **解决问题**: Docker 容器无限重启 (CrashLoop)、依赖冲突、启动报错。
-  - **关键词**: CrashLoop, 依赖冲突, 启动失败, 调试.
+- [实体关系](/models/entity-relationship.html)
+  - **内容**: ER 图、外键关系、级联策略
+  - **关键词**: ER 图, 外键, 关系, 级联, 一对多, 多对多
+
+## API 文档 (API Documentation)
+
+- [API 总览](/api/overview.html)
+  - **内容**: 端点列表、请求/响应格式、认证方式
+  - **关键词**: API, 端点, REST, 请求, 响应, Bearer Token
+
+- [API 设计规范](/api/conventions.html)
+  - **内容**: RESTful 规范、HTTP 方法、状态码、分页、版本策略
+  - **关键词**: RESTful, 规范, 状态码, 分页, 版本
+
+## 开发指南 (Guides)
+
+- [快速开始](/guides/getting-started.html)
+  - **内容**: 环境搭建、依赖安装、本地运行步骤
+  - **关键词**: 快速开始, 安装, 环境, 本地开发, Docker
+
+- [编码规范](/guides/coding-standards.html)
+  - **内容**: 命名约定、目录结构、代码风格、注释规范
+  - **关键词**: 编码规范, 命名, 代码风格, ESLint, Prettier
+
+- [Git 工作流](/guides/git-workflow.html)
+  - **内容**: 分支策略、Commit 规范、Code Review 流程
+  - **关键词**: Git, 分支, commit, PR, code review
+
+## 技术方案 (Solutions)
+
+- [缓存方案](/solutions/caching.html)
+  - **内容**: 缓存层级、Redis Key 规范、失效策略、常用模式
+  - **关键词**: 缓存, Redis, TTL, Cache-Aside, 缓存穿透, 缓存雪崩
+
+- [认证与授权](/solutions/authentication.html)
+  - **内容**: JWT 认证流程、Token 规范、RBAC 权限模型
+  - **关键词**: 认证, JWT, Token, RBAC, 权限, 登录
+
+- [错误处理规范](/solutions/error-handling.html)
+  - **内容**: 错误码体系、全局异常处理、日志规范
+  - **关键词**: 错误码, 异常处理, 日志, ERROR, 错误响应
+
+## 其他
+
+- [变更日志](/changelog/index.html)
+  - **内容**: 文档与项目变更记录
+  - **关键词**: changelog, 变更, 版本, 更新
+
+- [标签索引](/tags/index.html)
+  - **内容**: 按标签分类的文档索引
+  - **关键词**: 标签, 分类, 索引
