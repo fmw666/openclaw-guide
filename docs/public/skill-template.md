@@ -250,7 +250,7 @@ tags: ['architecture', '其他标签']
 
 #### models/*.md 模板
 
-```markdown
+````markdown
 ---
 title: [模型总览 / 实体关系]
 tags: ['models', 'database']
@@ -265,8 +265,6 @@ tags: ['models', 'database']
 （表格列出所有实体，或 ASCII ER 图）
 
 ## [实体名] 模型
-
-（SQL DDL 代码块 + 字段说明表格）
 
 ```sql
 CREATE TABLE table_name ( ... );
@@ -283,7 +281,7 @@ CREATE TABLE table_name ( ... );
 ## 关联文档
 
 - [链接](/path) — 关系说明
-```
+````
 
 #### api/*.md 模板
 
@@ -389,7 +387,6 @@ tags: ['guides', '其他标签']
 ### 4.1 克隆文档仓库
 
 ```bash
-# 如果当前项目旁边还没有 docsite 仓库
 cd ..
 git clone https://github.com/YOUR_ORG/YOUR_REPO.git
 cd YOUR_REPO
@@ -407,82 +404,13 @@ npm run dev
 
 假设要在 `solutions/` 下新增 `rate-limiting.md`：
 
-**Step 1 — 创建文档文件**
-
-```bash
-cat > docs/solutions/rate-limiting.md << 'EOF'
----
-title: 限流方案
-tags: ['solutions', 'rate-limiting', 'api']
----
-
-# 限流方案
-
-> 描述系统的 API 限流策略、算法选型与配置。
-
-## 方案概览
-
-...
-
-## 关联文档
-
-- [API 总览](/api/overview) — 限流应用于所有 API 端点
-- [部署架构](/architecture/deployment) — 限流中间件的部署位置
-EOF
-```
-
-**Step 2 — 更新 config.mts 侧边栏**
-
-在 `docs/.vitepress/config.mts` 中找到 `'/solutions/'` 的 sidebar 配置，在 `items` 数组末尾添加：
-
-```typescript
-{ text: '限流方案', link: '/solutions/rate-limiting' },
-```
-
-**Step 3 — 更新 ai-map.md**
-
-在意图映射表格中添加一行：
-
-```markdown
-| **设计限流方案** | [限流方案](/solutions/rate-limiting) | 令牌桶、滑动窗口、Redis 限流 |
-```
-
-在 JSON 索引中添加：
-
-```json
-"rate_limiting": "/solutions/rate-limiting.html",
-```
-
-**Step 4 — 更新 llms.txt**
-
-在 `## 技术方案 (Solutions)` 区域末尾添加：
-
-```
-- [限流方案](/solutions/rate-limiting.html)
-  - **内容**: API 限流策略、算法选型、Redis 配置
-  - **关键词**: 限流, rate limit, 令牌桶, 滑动窗口, Redis
-```
-
-**Step 5 — 更新 tags/index.md**
-
-在合适的标签区域添加链接。如果标签不存在则创建新的标签区域：
-
-```markdown
-## rate-limiting
-
-- [限流方案](/solutions/rate-limiting)
-```
-
-**Step 6 — 更新 changelog**
-
-在 `docs/changelog/index.md` 的 `[Unreleased]` 下添加：
-
-```markdown
-### Added
-- 新增限流方案文档 (`solutions/rate-limiting.md`)
-```
-
-**Step 7 — 提交**
+**Step 1** — 创建文档文件（遵循 §3 格式规范）
+**Step 2** — 更新 `config.mts` 侧边栏 → `items` 数组追加条目
+**Step 3** — 更新 `ai-map.md` → 表格添加意图行 + JSON 添加键值对
+**Step 4** — 更新 `llms.txt` → 对应分类下添加条目
+**Step 5** — 更新 `tags/index.md` → 对应标签下添加链接
+**Step 6** — 更新 `changelog/index.md` → `[Unreleased]` 下添加记录
+**Step 7** — 提交推送
 
 ```bash
 git add -A
@@ -494,29 +422,19 @@ git push
 
 ```bash
 # 1. 编辑目标文件
-#    (用你的编辑工具修改 docs/models/overview.md)
-
 # 2. 检查连锁更新（参考 §2.2 连锁更新矩阵）
-#    例如：修改了模型字段 → 检查 api/overview.md 是否需要同步
-
 # 3. 更新 changelog
-#    在 docs/changelog/index.md [Unreleased] 下添加记录
-
-# 4. 提交
+# 4. 提交推送
 git add -A
-git commit -m "docs(models): update user table schema — add phone field"
+git commit -m "docs(models): update user table — add phone field"
 git push
 ```
 
 ### 4.5 构建与验证
 
 ```bash
-# 本地构建，检查是否有错误
 npm run build
-
-# 构建产物在 docs/.vitepress/dist/
-# 可检查 sitemap.xml 是否包含新页面
-cat docs/.vitepress/dist/sitemap.xml
+cat docs/.vitepress/dist/sitemap.xml  # 检查新页面是否在 sitemap 中
 ```
 
 ### 4.6 Commit Message 规范
@@ -525,179 +443,13 @@ cat docs/.vitepress/dist/sitemap.xml
 docs(<scope>): <description>
 ```
 
-| scope | 使用场景 |
-|:------|:---------|
-| `architecture` | 架构文档变更 |
-| `models` | 模型文档变更 |
-| `api` | API 文档变更 |
-| `guides` | 指南文档变更 |
-| `solutions` | 方案文档变更 |
-| `index` | 索引文件变更（ai-map、llms.txt、tags） |
-| `config` | VitePress 配置变更 |
-
-示例：
-```
-docs(models): add orders table and update ER diagram
-docs(api): add POST /orders endpoint
-docs(solutions): update caching strategy for order queries
-docs(index): add orders-related entries to ai-map and llms.txt
-```
+scope: `architecture` | `models` | `api` | `guides` | `solutions` | `index` | `config`
 
 ---
 
-## 5. 关键文件内容参考
+## 5. 集成方式
 
-以下是站点中每个关键配置/索引文件的完整结构，供你在维护时参考和修改。
-
-### 5.1 docs/.vitepress/config.mts 结构
-
-```typescript
-import { defineConfig } from 'vitepress'
-
-const SITE_TITLE = 'YOUR_PROJECT_NAME Docsite'
-const SITE_DESC  = 'Architecture, models, APIs, and guides — for humans and AI agents.'
-const BASE_PATH  = '/YOUR_REPO/'
-const SITE_URL   = 'https://YOUR_ORG.github.io/YOUR_REPO'
-const GITHUB_URL = 'https://github.com/YOUR_ORG/YOUR_REPO'
-
-export default defineConfig({
-  title: SITE_TITLE,
-  description: SITE_DESC,
-  base: BASE_PATH,
-
-  head: [
-    ['meta', { name: 'robots', content: 'index, follow' }],
-    ['link', { rel: 'sitemap', type: 'application/xml', href: `${BASE_PATH}sitemap.xml` }],
-  ],
-  sitemap: { hostname: SITE_URL },
-  lastUpdated: true,
-
-  themeConfig: {
-    siteTitle: SITE_TITLE,
-    logo: '/logo.svg',
-    nav: [
-      { text: '首页',       link: '/' },
-      { text: 'AI 索引',    link: '/ai-map' },
-      { text: '架构设计',   link: '/architecture/overview' },
-      { text: '数据模型',   link: '/models/overview' },
-      { text: 'API 文档',   link: '/api/overview' },
-      { text: '开发指南',   link: '/guides/getting-started' },
-      { text: '技术方案',   link: '/solutions/caching' },
-    ],
-    sidebar: {
-      '/architecture/': [{ text: '架构设计', items: [
-        { text: '系统架构总览', link: '/architecture/overview' },
-        { text: '技术栈说明',   link: '/architecture/tech-stack' },
-        { text: '部署架构',     link: '/architecture/deployment' },
-      ]}],
-      '/models/': [{ text: '数据模型', items: [
-        { text: '模型总览', link: '/models/overview' },
-        { text: '实体关系', link: '/models/entity-relationship' },
-      ]}],
-      '/api/': [{ text: 'API 文档', items: [
-        { text: 'API 总览',     link: '/api/overview' },
-        { text: 'API 设计规范', link: '/api/conventions' },
-      ]}],
-      '/guides/': [{ text: '开发指南', items: [
-        { text: '快速开始', link: '/guides/getting-started' },
-        { text: '编码规范', link: '/guides/coding-standards' },
-        { text: 'Git 工作流', link: '/guides/git-workflow' },
-      ]}],
-      '/solutions/': [{ text: '技术方案', items: [
-        { text: '缓存方案',     link: '/solutions/caching' },
-        { text: '认证与授权',   link: '/solutions/authentication' },
-        { text: '错误处理规范', link: '/solutions/error-handling' },
-        // ← 新增文档在这里追加
-      ]}],
-      '/changelog/': [{ text: '变更日志', items: [
-        { text: '变更记录', link: '/changelog/' },
-      ]}],
-    },
-    socialLinks: [{ icon: 'github', link: GITHUB_URL }],
-    footer: {
-      message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2026 YOUR_ORG',
-    },
-    search: { provider: 'local' },
-    outline: { level: [2, 3], label: '页面导航' },
-    lastUpdated: { text: '最后更新于' },
-    editLink: {
-      pattern: `${GITHUB_URL}/edit/main/docs/:path`,
-      text: '在 GitHub 上编辑此页',
-    },
-    docFooter: { prev: '上一篇', next: '下一篇' },
-  },
-})
-```
-
-**修改要点**：添加新文档时只需在 `sidebar` 对应分类的 `items` 末尾追加条目。添加新分类需同时增加 `nav` 条目和 `sidebar` 新键。
-
-### 5.2 docs/ai-map.md 结构
-
-文件由三部分组成：
-
-1. **意图映射表格** — 每行：`| 意图描述 | [文档名](/path) | 关键词列表 |`
-2. **JSON 索引** — 键值对：`"slug": "/path.html"`
-3. **维护触发规则** — 变更→需更新的文档
-
-新增文档时，在表格和 JSON 中各添加一行。
-
-### 5.3 docs/public/llms.txt 结构
-
-```
-# 站点名 (LLM Index)
-
-**Site:** ...
-**Base URL:** ...
-
-## 分类名 (Category)
-
-- [文档标题](/path.html)
-  - **内容**: 一句话描述
-  - **关键词**: 逗号分隔的关键词
-```
-
-新增文档时，在对应分类下添加一个条目。如果是新分类，创建新的 `##` 区域。
-
-### 5.4 docs/changelog/index.md 结构
-
-```markdown
-## [Unreleased]
-
-### Added
-- 新增项
-
-### Changed
-- 修改项
-
----
-
-## [2026-02-25]
-
-### Added
-- 历史记录
-```
-
-每次修改文档后，在 `[Unreleased]` 下添加记录。发版时将 `[Unreleased]` 改为日期。
-
-### 5.5 docs/tags/index.md 结构
-
-```markdown
-## 标签名
-
-- [文档标题](/path)
-- [文档标题](/path)
-```
-
-新增文档时，在所有匹配的标签区域下添加链接。如果标签不存在，创建新的 `##` 区域。
-
----
-
-## 6. 集成方式
-
-### 6.1 在 Cursor 项目中使用
-
-**方式 A — 放入 Cursor Rules（推荐）**
+### 在 Cursor 项目中使用
 
 在项目中创建 `.cursor/rules/docsite.mdc`：
 
@@ -716,39 +468,21 @@ alwaysApply: true
 3. 文档仓库地址：https://github.com/YOUR_ORG/YOUR_REPO
 ```
 
-**方式 B — 作为 Agent Skill 引用**
-
-将 `skill.md` 放在项目根目录，在 System Prompt 中添加：
-
-```
-你有一个项目知识库，操作手册在 skill.md。当你需要项目知识或做出影响文档的变更时，遵循 skill.md 的协议。
-```
-
-### 6.2 多项目共享
+### 多项目共享
 
 ```
 your-org/
-├── project-frontend/       # 前端项目
-│   └── skill.md            # ← 同一份 skill，指向同一个 docsite
-├── project-backend/        # 后端项目
-│   └── skill.md
-├── project-database/       # 数据库项目
-│   └── skill.md
-└── project-docsite/        # 文档站点（基于 docsite-rag-template）
-    └── docs/
+├── project-frontend/       → skill.md (指向同一 docsite)
+├── project-backend/        → skill.md
+├── project-database/       → skill.md
+└── project-docsite/        ← 文档站点仓库
 ```
-
-所有项目的 `skill.md` 内容相同（或略有项目特定定制），指向同一个文档站点。AI Agent 在任意项目开发时都能读取知识、维护文档。
-
-### 6.3 其他 Agent 平台
-
-将 `skill.md` 全文注入 System Prompt，或将其作为 RAG 可检索文档添加到 Agent 的数据源中。
 
 ---
 
-## 7. 占位符替换清单
+## 6. 占位符替换
 
-使用本模板时，全局搜索并替换以下占位符：
+全局搜索替换：
 
 | 占位符 | 替换为 | 示例 |
 |:-------|:-------|:-----|
@@ -756,43 +490,13 @@ your-org/
 | `YOUR_ORG` | GitHub 组织/用户名 | `myorg` |
 | `YOUR_REPO` | 文档站点仓库名 | `evomap-docsite` |
 
-替换后 `{SITE}` 即为 `https://myorg.github.io/evomap-docsite`。
-
-**需要替换的文件清单**：
-
-| 文件 | 包含的占位符 |
-|:-----|:-------------|
-| `skill.md` | 全部三个 |
-| `docs/.vitepress/config.mts` | 全部三个 |
-| `docs/index.md` | `YOUR_PROJECT_NAME`, `YOUR_ORG`, `YOUR_REPO` |
-| `docs/ai-map.md` | 无（使用相对路径） |
-| `docs/public/llms.txt` | `YOUR_PROJECT_NAME`, `YOUR_ORG`, `YOUR_REPO` |
-| `README.md` | `YOUR_ORG`, `YOUR_REPO` |
-
 一键替换脚本：
 
 ```bash
-# 用法：./replace.sh EvoMap myorg evomap-docsite
 PROJECT_NAME=${1:?用法: $0 PROJECT_NAME ORG REPO}
-ORG=${2:?}
-REPO=${3:?}
-
-FILES=(
-  "skill.md"
-  "README.md"
-  "docs/.vitepress/config.mts"
-  "docs/index.md"
-  "docs/public/llms.txt"
-)
-
-for f in "${FILES[@]}"; do
-  if [ -f "$f" ]; then
-    sed -i "s/YOUR_PROJECT_NAME/$PROJECT_NAME/g" "$f"
-    sed -i "s/YOUR_ORG/$ORG/g" "$f"
-    sed -i "s/YOUR_REPO/$REPO/g" "$f"
-  fi
+ORG=${2:?}; REPO=${3:?}
+for f in skill.md README.md docs/.vitepress/config.mts docs/index.md docs/public/llms.txt; do
+  [ -f "$f" ] && sed -i "s/YOUR_PROJECT_NAME/$PROJECT_NAME/g; s/YOUR_ORG/$ORG/g; s/YOUR_REPO/$REPO/g" "$f"
 done
-
-echo "Done. Replaced placeholders in ${#FILES[@]} files."
-echo "Site will be: https://$ORG.github.io/$REPO/"
+echo "Done → https://$ORG.github.io/$REPO/"
 ```

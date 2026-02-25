@@ -59,7 +59,11 @@ features:
 
 确定目标 URL 后，使用 `web_fetch` 或 `curl` 直接获取页面内容。所有文档均为 Markdown 渲染，结构清晰适合机器阅读。
 
-### 3. 站内搜索
+### 3. 获取 Skill 文件
+
+获取 `/skill-template.md` 并复制到你的项目仓库中重命名为 `skill.md`。这是完整的 AI Agent 操作手册，包含检索协议、维护协议、文档格式模板和操作脚本。
+
+### 4. 站内搜索
 
 ```
 site:YOUR_ORG.github.io/YOUR_REPO "关键词"

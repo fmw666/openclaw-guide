@@ -8,8 +8,9 @@
 
 - **结构化知识体系** — 架构设计、数据模型、API 文档、技术方案、开发指南，分类清晰
 - **AI 检索优化** — 内置 `llms.txt`、AI 意图映射表（ai-map）、XML Sitemap
-- **Agent 集成方案** — 提供 `skill.md`，在任何项目中引用即可让 Agent 访问知识库
-- **文档自动维护** — `skill.md` 规定了 AI 开发时必须同步更新文档的协议
+- **Agent 完整操作手册** — `skill.md` 包含检索协议、维护协议、格式规范、操作脚本、连锁更新矩阵，AI 读一遍就知道怎么用
+- **文档效应体系** — 每类文档定义了明确的效应范围和连锁更新规则，AI 改一处自动知道要同步哪些文档
+- **文档格式模板** — 每种文档分类提供精确的 Markdown 模板，AI 创建新文档零猜测
 - **VitePress 驱动** — 人类可读的精美文档站点，支持全文搜索、暗色模式
 
 ## 适用场景
@@ -87,7 +88,8 @@ docsite-rag-template/
 │   │       ├── index.ts            # 主题扩展
 │   │       └── ArticleMetadata.vue # 文章元数据组件
 │   ├── public/
-│   │   └── llms.txt                # LLM 专用索引文件
+│   │   ├── llms.txt                # LLM 专用索引文件
+│   │   └── skill-template.md       # AI Skill 模板（可从站点直接获取）
 │   ├── architecture/               # 🏗️ 架构设计
 │   │   ├── overview.md             #    系统架构总览
 │   │   ├── tech-stack.md           #    技术栈说明
@@ -121,33 +123,51 @@ docsite-rag-template/
 └── README.md
 ```
 
+## skill.md — AI Agent 完整操作手册
+
+`skill.md` 是整个模板的核心。AI Agent 读一遍就能完全理解如何使用。包含 7 大部分：
+
+| 章节 | 内容 |
+|:-----|:-----|
+| **§0 站点概况** | 站点信息 + 完整文件树 |
+| **§1 知识检索** | 4 步检索流程 + 快捷路径表 + 可用脚本 |
+| **§2 文档效应** | 9 类文档的效应说明 + 11 条连锁更新规则 |
+| **§3 格式规范** | Frontmatter 要求 + 正文结构 + 5 种分类文档模板 |
+| **§4 操作脚本** | 克隆、预览、新增文档（7步完整流程）、修改文档、构建验证、Commit 规范 |
+| **§5 文件参考** | config.mts / ai-map / llms.txt / changelog / tags 的完整结构 |
+| **§6 集成方式** | Cursor Rules 配置 + 多项目共享 + 其他平台集成 |
+
+站点还提供 `/skill-template.md`，AI 可直接从部署后的站点获取并复制到项目中。
+
 ## AI 检索架构
 
 ```
-AI Agent (in any project)
+AI Agent (在任意项目中开发)
     │
-    ├─ 读取 skill.md  ──→  了解检索协议和维护规则
+    ├─ 读取 skill.md         ──→  理解全部协议（检索 + 维护 + 格式）
     │
-    ├─ 获取 /llms.txt  ──→  建立文档索引（摘要 + 关键词 + 路径）
+    ├─ 获取 {SITE}/llms.txt  ──→  建立文档索引（摘要 + 关键词 + 路径）
     │
-    ├─ 获取 /ai-map    ──→  按开发意图直接定位文档
+    ├─ 获取 {SITE}/ai-map    ──→  按开发意图直接定位文档
     │
-    ├─ 获取 /sitemap.xml ──→  完整页面 URL 列表
-    │
-    └─ web_fetch 目标 URL ──→  获取具体文档内容
+    └─ web_fetch 目标 URL    ──→  获取具体文档内容
 ```
 
 ## 文档维护闭环
 
 ```
-开发变更 ──→ AI Agent 检测到影响范围
-                │
-                ├─ 更新对应文档内容
-                ├─ 更新 ai-map.md（如有新文档）
-                ├─ 更新 llms.txt（如有新文档）
-                ├─ 更新 tags/index.md
-                ├─ 追加 changelog/index.md
-                └─ 提交并推送
+开发变更
+  │
+  ▼
+AI 根据 skill.md §2.2 连锁更新矩阵判断影响范围
+  │
+  ├─ 更新对应文档内容（遵循 §3 格式规范）
+  ├─ 更新 ai-map.md     （如有新文档）
+  ├─ 更新 llms.txt      （如有新文档）
+  ├─ 更新 tags/index.md  （如有新文档）
+  ├─ 更新 config.mts     （如有新文档）
+  ├─ 追加 changelog
+  └─ git commit + push（遵循 §4.6 Commit 规范）
 ```
 
 ## 自定义扩展
@@ -158,7 +178,7 @@ AI Agent (in any project)
 2. 在 `config.mts` 的 `sidebar` 中添加对应配置
 3. 在 `nav` 中添加导航项（可选）
 4. 更新 `ai-map.md`、`llms.txt`、`tags/index.md`
-5. 更新 `skill.md` 中的快捷路径表
+5. 更新 `skill.md` 中的快捷路径表和文件树
 
 ### 添加文章元数据
 
